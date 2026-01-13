@@ -1,0 +1,533 @@
+/* fonts */
+@font-face {
+    font-family: 'Fira Sans';
+    src: local('Fira Sans'), url(./fonts/FiraSans-Regular.ttf);
+}
+
+:root{
+    --tm-app-font-family: 'Fira Sans';
+    --tm-app-header-font-size: clamp(16px, 3vw , 48px);
+    --tm-app-header-font-size-large: clamp(16px, 1.6vw , 36px);
+    --tm-app-header-font-size-medium: clamp(16px, 1.25vw , 28px);
+    --tm-app-text-font-size: clamp(14px, 1vw, 18px);
+}
+
+/* colors */
+:root{
+    --tm-app-cp-blue-10-op-45: #CBDFF473;
+    --tm-app-cp-blue-10-op-75: #CBDFF4BF;
+    --tm-app-cp-blue-10: #CBDFF4;
+    --tm-app-cp-blue-20: #93c4f5;
+    --tm-app-cp-blue-30: #54ddff;
+    --tm-app-cp-blue-50: #50A0F1;
+    --tm-app-cp-blue-70: #020275;
+    --tm-app-cp-blue-90: #01203F;
+    
+    --tm-app-cp-seawave-30: #ff91ff;
+    --tm-app-cp-seawave-70: #053a47;
+
+    --tm-app-cp-white: #ffffff;
+
+    --tm-app-cp-black-op-12: #0000001f;
+
+    --tm-app-cp-grey-50: #3d3d3f;
+}
+
+/* light-theme */
+:root{
+    --tm-app-body-bg-start: var(--tm-app-cp-blue-30);
+    --tm-app-body-bg-end: var(--tm-app-cp-seawave-30);
+    --tm-app-header-text-color: var(--tm-app-cp-blue-70);
+    --tm-app-tasklist-header-text-color: var(--tm-app-cp-blue-70);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--tm-app-font-family);
+    font-weight: 400;
+}
+
+ul{
+    list-style: none;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(var(--tm-app-body-bg-start), var(--tm-app-body-bg-end));
+    background-attachment: fixed;
+}
+
+#tm-app-header{
+    width: 100%;
+    box-sizing: border-box;
+    padding: max(3vh, 30px) max(2.6vw, 80px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: var(--tm-app-header-font-size);
+    color: var(--tm-app-header-text-color);
+
+    & > #tm-app-name{
+        font-size: inherit;
+    }
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    & > .user-info__avatar {
+        --avatar-size: clamp(40px, 6vw, 80px);
+        width: var(--avatar-size);
+        height: var(--avatar-size);
+        object-position: center;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid var(--tm-app-cp-white);
+    }
+}
+
+#tm-app-base{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 max(2.5vw, 80px);
+}
+
+.tasklists-container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 3vh;
+    column-gap: calc(8% / 3);
+
+    & > .tasklist {
+        width: 23%;
+        box-sizing: border-box;
+        padding: 14px;
+        border-radius: 10px;
+        background-color: var(--tm-app-cp-blue-10-op-75);
+        box-shadow: 2px 2px 4px var(--tm-app-cp-black-op-12);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        &:last-child{
+            background-color: var(--tm-app-cp-blue-10-op-45);
+        }
+
+        & > .tasklist_box{
+            flex-direction: row;
+            gap: 12px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+
+
+            & > .tasklists__name{
+                text-align: left;
+                font-weight: 600;
+                color: var(--tm-app-tasklist-header-text-color);
+                font-size: var(--tm-app-header-font-size-large);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            & > .tasklist__actions {
+                flex-direction: row;
+                display: grid;
+                gap: 2px;
+                opacity: 0.5;
+                transition: opacity 0.2s;
+                flex-shrink: 0;
+                grid-template-columns: repeat(2, 1fr);
+                width: 60px;
+                height: 30px;
+            }
+        }
+    }
+}
+
+.tasklist__add {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.buttonpr{
+    justify-self: right;
+    border-radius: 8px;
+    background-color: var(--tm-app-cp-blue-20);
+    color: var(--tm-app-cp-grey-50);
+    transition: all 0.2s;
+    border: 1px solid transparent;
+
+    box-sizing: border-box;
+    font-family: var(--tm-app-font-family);
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px;
+
+    &:hover{
+        border-color: var(--tm-app-cp-blue-70);
+    }
+}
+
+.tasklist__add-task-btn{
+    all: unset;
+    cursor: pointer;
+    font-size: var(--tm-app-header-font-size-medium);
+    color: var(--tm-app-cp-grey-50);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 8px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    &:hover .add-task-btn-text {
+        font-weight: 600;
+    }
+}
+
+.add-task-btn-text,
+.add-list-btn-text {
+    transition: font-weight 0.2s;
+}
+
+.tasklists__tasks-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.task{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: var(--tm-app-cp-blue-20);
+    box-shadow: 2px 2px 4px var(--tm-app-cp-black-op-12);
+    color: var(--tm-app-cp-grey-50);
+    gap: 8px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+
+    &:hover{
+        border-color: var(--tm-app-cp-blue-70);
+    }
+}
+
+
+
+.task__text {
+    flex-grow: 1;
+    text-align: left;
+    font-size: var(--tm-app-text-font-size);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+.time_box_b {
+    gap: 8px;
+    text-align: center;
+    font-size: var(--tm-app-text-font-size);
+    line-height: 1.4;
+    margin-right: 64px;
+}
+
+.task__actions {
+    display: grid;
+    gap: 2px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+    grid-template-columns: repeat(2, 1fr);
+    width: 60px;
+    height: 30px;
+}
+
+.task:hover .task__actions {
+    opacity: 1;
+}
+
+/* Стили для кнопок действий */
+.move-left-btn {
+    all: unset;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.move-left-btn:hover {
+    background-color: var(--tm-app-cp-white);
+    box-shadow: 0 1px 3px var(--tm-app-cp-black-op-12);
+}
+
+.move-left-btn:active {
+    transform: scale(0.95);
+}
+
+.move-left-btn img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.move-btn {
+    all: unset;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.move-btn:hover {
+    background-color: var(--tm-app-cp-white);
+    box-shadow: 0 1px 3px var(--tm-app-cp-black-op-12);
+}
+
+.move-btn:active {
+    transform: scale(0.95);
+}
+
+.move-btn img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+.edit-btn {
+    all: unset;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.edit-btn:hover {
+    background-color: var(--tm-app-cp-white);
+    box-shadow: 0 1px 3px var(--tm-app-cp-black-op-12);
+}
+
+.edit-btn:active {
+    transform: scale(0.95);
+}
+
+.edit-btn img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+.delete-btn {
+    all: unset;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.delete-btn:hover {
+    background-color: var(--tm-app-cp-white);
+    box-shadow: 0 1px 3px var(--tm-app-cp-black-op-12);
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+.delete-btn img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.delete-btn-emp {
+    all: unset;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.delete-btn-emp:hover {
+    background-color: var(--tm-app-cp-white);
+    box-shadow: 0 1px 3px var(--tm-app-cp-black-op-12);
+}
+
+.delete-btn-emp:active {
+    transform: scale(0.95);
+}
+
+.delete-btn-emp img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+#add-tasklists-input {
+    display: none;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: var(--tm-app-cp-white);
+    border: 1px solid var(--tm-app-cp-blue-20);
+    font-size: var(--tm-app-text-font-size);
+    color: var(--tm-app-cp-grey-50);
+    transition: all 0.2s;
+    font-family: inherit;
+    margin-top: 10px;
+}
+
+#add-tasklists-btn{
+    all: unset;
+    font-size: var(--tm-app-header-font-size-large);
+    color: var(--tm-app-tasklist-header-text-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    display: inherit;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    &:hover .add-list-btn-text {
+        font-weight: 600;
+    }
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 1200px) {
+    .tasklist {
+        width: 31% !important;
+    }
+    
+    .tasklists-container {
+        column-gap: 3.5%;
+    }
+}
+
+@media (max-width: 992px) {
+    .tasklist {
+        width: 48% !important;
+    }
+    
+    .tasklists-container {
+        column-gap: 4%;
+    }
+    
+    #tm-app-header,
+    #tm-app-base {
+        padding-left: max(2.5vw, 40px);
+        padding-right: max(2.5vw, 40px);
+    }
+}
+
+@media (max-width: 768px) {
+    .tasklist {
+        width: 100% !important;
+    }
+    
+    .task__actions {
+        opacity: 0.7;
+    }
+    
+    .user-info {
+        gap: 16px;
+    }
+    
+    .task__actions--grid,
+    .task__actions--pyramid {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .action-btn {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .action-btn img {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    #tm-app-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .task {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .task__actions {
+        align-self: flex-end;
+    }
+}

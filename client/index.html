@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script type = "module" src="index.js"></script>
+    <title>Test Manager</title>
+</head>
+<body>
+    <header id="tm-app-header">
+        <h1 id="tm-app-name">Менеджмент заявок тестирования оборудования</h1>
+        <div id="tm-app-header__right-block">
+            <div class="user-info">
+                <img src="./images/User.jpg" alt="User avatar" class="user-info__avatar" />
+                <span class="user-info__name">Менеджер</span>
+            </div>
+        </div>
+    </header>
+    <main id="tm-app-base">
+        <ul class="tasklists-container">
+                        
+            <li class="tasklist">
+                <button id="add-tasklists-btn">
+                    <span class="add-list-btn-text">Добавить сотрудника...</span>
+                </button>
+                <input
+                    type="text"
+                    id = "add-tasklists-input"
+                    placeholder="Иванов И. И."
+                />
+            </li>
+        </ul>
+    </main>
+</body>
+</html>

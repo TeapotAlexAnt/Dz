@@ -1,0 +1,44 @@
+Менеджмент заявок на тестирование оборудования
+
+Для работников
+
+Просматривать i
+select * from employee order by name asc;
+
+Добавлять i
+insert into employee (id, name) values  ('57f9fc35-d164-45c6-913f-b1b879ad04cd','Иванов И. И.');
+
+Удалять i
+delete from test_tasks where emp_id = '57f9fc35-d164-45c6-913f-b1b879ad04cd';
+delete from employee where id = '57f9fc35-d164-45c6-913f-b1b879ad04cd';
+
+Изменять i
+update employee set name = 'Иванов И. В.' where id = '57f9fc35-d164-45c6-913f-b1b879ad04cd';
+
+----------------------------------------------------------------------------------------------------------------
+
+Для заявок
+
+Просматривать i
+select * from test_tasks order by date_st  asc;
+select * from test_tasks order by date_st asc where emp_id = ' a ';
+
+Добавлять i
+insert into test_tasks (id, date_st, date_ed, equp_id, emp_id) 
+values  ('43f7a4d2-6170-423d-803c-453fb402590d','2026-01-23','2026-01-28',
+'1bc8420c-d713-4d83-a2f7-d1462e66fbcb','18c38188-2478-41df-bc9c-f2f233c18198');
+
+Удалять i
+delete from test_tasks where id = '43f7a4d2-6170-423d-803c-453fb402590d';
+
+Перемещать
+update test_tasks set emp_id = '72f34327-6e97-439c-a8c0-44a970d7d50f' where id = '43f7a4d2-6170-423d-803c-453fb402590d';
+
+
+Для оборудования
+
+Просматривать
+select * from equipment; i
+
+
+create role test_manager login encrypted password 'test_manager';
