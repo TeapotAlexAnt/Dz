@@ -186,14 +186,20 @@ export default class Employee{
         }
 
         const tasks = await getTasks(); // taskID,tEquipmentID,tEmployeeID,taskName,taskDateSt,taskDateEd
-        const curtasks = tasks.find(task => task.tEquipmentID === equipmentID);
+        const curtasks = [];
+        
+        tasks.forEach (task =>{
+            if (task.tEquipmentID === equipmentID) {
+                curtasks.push(task);
+            };
+        })
 
         if(curtasks){
             if(curtasks.length){
                 for (const curtask of curtasks){
                     if(!(((curtask.taskDateSt > date_beg) && (curtask.taskDateSt > date_end)) 
                         || ((curtask.taskDateEd < date_beg) && (curtask.taskDateEd < date_end)))){
-                        alert('Срок бронирования пересекается с другим1');
+                        alert('Срок бронирования пересекается с другим');
                         return;
                     };
                 };
@@ -201,7 +207,7 @@ export default class Employee{
             } else {
                 if(!(((curtasks.taskDateSt > date_beg) && (curtasks.taskDateSt > date_end))
                     || ((curtasks.taskDateEd < date_beg) && (curtasks.taskDateEd < date_end)))){
-                    alert('Срок бронирования пересекается с другим2');
+                    alert('Срок бронирования пересекается с другим');
                     return;
                 }
             };
